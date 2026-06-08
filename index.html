@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camarote Resenha Morumbi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dark: #8B6914;
+    --black: #050505;
+    --black-soft: #0D0D0D;
+    --black-card: #111111;
+    --black-border: #1A1A1A;
+    --red: #B91C1C;
+    --red-light: #DC2626;
+    --white: #FAFAFA;
+    --white-dim: #D4D4D4;
+    --white-muted: #888;
+    /* Admin palette */
+    --adm-bg: #F3F2EC;
+    --adm-white: #fff;
+    --adm-border: #e0dfd8;
+    --adm-text: #1a1a1a;
+    --adm-muted: #888;
+    --adm-purple: #534AB7;
+    --adm-purple-light: #EEEDFE;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; cursor: default; }
+
+  /* ─── NAVIGATION ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(5,5,5,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(2px);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; }
+  .nav-logo span { color: var(--white); }
+  .nav-links { display: flex; gap: 36px; align-items: center; }
+  .nav-links a { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--white-dim); text-decoration: none; transition: color .3s; font-weight: 400; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { background: var(--gold); color: var(--black) !important; padding: 10px 22px; border-radius: 2px; font-weight: 500 !important; }
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--black) !important; }
+  .nav-admin-btn {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(201,168,76,0.4) !important; border: 1px solid rgba(201,168,76,0.2);
+    padding: 7px 14px; border-radius: 2px; cursor: pointer; transition: all .3s;
+    background: transparent;
+  }
+  .nav-admin-btn:hover { color: var(--gold) !important; border-color: rgba(201,168,76,0.5) !important; }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, rgba(5,5,5,0.85) 0%, rgba(5,5,5,0.4) 50%, rgba(5,5,5,0.9) 100%),
+      repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(201,168,76,0.03) 2px, rgba(201,168,76,0.03) 4px),
+      radial-gradient(ellipse at 30% 50%, #1a0e00 0%, #050505 60%);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 140px 40px 80px; position: relative; overflow: hidden;
+  }
+  #hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center 60%, rgba(201,168,76,0.08) 0%, transparent 70%); pointer-events: none; }
+  #hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to top, var(--black) 0%, transparent 100%); }
+
+  .hero-badge { display: inline-block; border: 1px solid rgba(201,168,76,0.4); padding: 8px 24px; border-radius: 20px; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 36px; animation: fadeUp .8s ease forwards; }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(42px, 6vw, 88px); font-weight: 900; line-height: 1.05; color: var(--white); margin-bottom: 28px; animation: fadeUp .9s .1s ease both; }
+  .hero-title em { color: var(--gold); font-style: italic; display: block; }
+  .hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 2vw, 22px); font-weight: 300; color: var(--white-dim); max-width: 560px; line-height: 1.7; margin-bottom: 52px; animation: fadeUp 1s .2s ease both; }
+  .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; animation: fadeUp 1s .3s ease both; margin-bottom: 80px; }
+  .btn-primary { background: var(--gold); color: var(--black); padding: 16px 40px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; border: none; cursor: pointer; transition: all .3s; border-radius: 2px; font-family: 'DM Sans', sans-serif; }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  .btn-outline { background: transparent; color: var(--white); padding: 16px 40px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 400; cursor: pointer; border: 1px solid rgba(255,255,255,0.25); transition: all .3s; border-radius: 2px; font-family: 'DM Sans', sans-serif; }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+  .hero-stats { display: flex; gap: 60px; flex-wrap: wrap; justify-content: center; animation: fadeUp 1s .4s ease both; border-top: 1px solid rgba(201,168,76,0.15); padding-top: 48px; }
+  .stat-item { text-align: center; }
+  .stat-number { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: var(--gold); line-height: 1; }
+  .stat-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--white-muted); margin-top: 8px; }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 100px 60px; max-width: 1200px; margin: 0 auto; }
+  .section-full { max-width: none; padding: 100px 0; }
+  .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+  .section-tag { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: block; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 56px); font-weight: 700; color: var(--white); line-height: 1.15; margin-bottom: 20px; }
+  .section-title em { color: var(--gold); font-style: italic; }
+  .section-desc { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--white-dim); line-height: 1.8; max-width: 560px; font-weight: 300; }
+  .section-divider { width: 60px; height: 1px; background: var(--gold); margin: 24px 0; }
+
+  /* ─── SOBRE ─── */
+  #sobre { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .sobre-visual { position: relative; height: 500px; background: var(--black-card); border: 1px solid var(--black-border); border-radius: 4px; overflow: hidden; }
+  .sobre-visual::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(201,168,76,0.05) 0%, transparent 50%), repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(201,168,76,0.02) 40px, rgba(201,168,76,0.02) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(201,168,76,0.02) 40px, rgba(201,168,76,0.02) 41px); }
+  .sobre-visual-inner { position: absolute; inset: 40px; border: 1px solid rgba(201,168,76,0.2); border-radius: 2px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .sobre-icon { font-size: 64px; margin-bottom: 20px; line-height: 1; filter: drop-shadow(0 0 20px rgba(201,168,76,0.4)); }
+  .sobre-visual-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--gold); margin-bottom: 8px; }
+  .sobre-visual-sub { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--white-muted); }
+  .benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 40px; }
+  .benefit-item { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--white-dim); padding: 12px 16px; border: 1px solid var(--black-border); border-radius: 2px; background: var(--black-card); transition: border-color .3s; }
+  .benefit-item:hover { border-color: rgba(201,168,76,0.3); }
+  .benefit-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+  /* ─── EXPERIÊNCIA ─── */
+  #experiencia { background: var(--black-card); }
+  .exp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--black-border); border: 1px solid var(--black-border); margin-top: 64px; }
+  .exp-card { background: var(--black-card); padding: 48px 32px; transition: background .4s; position: relative; overflow: hidden; }
+  .exp-card::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transition: transform .4s; transform-origin: left; }
+  .exp-card:hover { background: #141414; }
+  .exp-card:hover::before { transform: scaleX(1); }
+  .exp-icon { font-size: 40px; margin-bottom: 28px; display: block; filter: drop-shadow(0 0 12px rgba(201,168,76,0.2)); }
+  .exp-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--white); margin-bottom: 12px; font-weight: 700; }
+  .exp-desc { font-size: 13px; color: var(--white-muted); line-height: 1.7; }
+
+  /* ─── EVENTOS ─── */
+  .eventos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 64px; }
+  .evento-card { background: var(--black-card); border: 1px solid var(--black-border); border-radius: 4px; overflow: hidden; transition: transform .3s, border-color .3s; cursor: pointer; }
+  .evento-card:hover { transform: translateY(-6px); border-color: rgba(201,168,76,0.3); }
+  .evento-card-header { height: 180px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .evento-bg { position: absolute; inset: 0; font-size: 80px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 0 40px rgba(201,168,76,0.3)); }
+  .evento-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, rgba(17,17,17,0.9) 100%); }
+  .evento-tag { position: absolute; top: 16px; right: 16px; background: var(--red); padding: 4px 12px; border-radius: 2px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: white; }
+  .evento-body { padding: 24px; }
+  .evento-date { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .evento-name { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--white); margin-bottom: 8px; font-weight: 700; }
+  .evento-local { font-size: 12px; color: var(--white-muted); margin-bottom: 20px; }
+  .evento-btn { display: block; text-align: center; background: transparent; border: 1px solid rgba(201,168,76,0.4); padding: 12px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); cursor: pointer; transition: all .3s; border-radius: 2px; }
+  .evento-btn:hover { background: var(--gold); color: var(--black); }
+
+  /* ─── GALERIA ─── */
+  #galeria { background: var(--black-soft); }
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 220px); gap: 8px; margin-top: 64px; }
+  .gallery-item { border-radius: 4px; overflow: hidden; position: relative; cursor: pointer; background: var(--black-card); display: flex; align-items: center; justify-content: center; font-size: 56px; border: 1px solid var(--black-border); transition: transform .3s; }
+  .gallery-item:hover { transform: scale(1.02); border-color: rgba(201,168,76,0.3); }
+  .gallery-item.large { grid-column: span 2; }
+  .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(201,168,76,0.15) 0%, transparent 60%); opacity: 0; transition: opacity .3s; display: flex; align-items: flex-end; padding: 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+  /* ─── COMO FUNCIONA ─── */
+  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 64px; position: relative; }
+  .steps-grid::before { content: ''; position: absolute; top: 48px; left: 12.5%; right: 12.5%; height: 1px; background: linear-gradient(to right, transparent, var(--gold), var(--gold), transparent); opacity: .3; }
+  .step-item { padding: 0 24px; text-align: center; }
+  .step-number { width: 96px; height: 96px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.3); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: var(--gold); margin: 0 auto 28px; background: var(--black-card); position: relative; z-index: 1; }
+  .step-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 10px; letter-spacing: 1px; }
+  .step-desc { font-size: 13px; color: var(--white-muted); line-height: 1.6; }
+
+  /* ─── DEPOIMENTOS ─── */
+  .dep-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 64px; }
+  .dep-card { padding: 36px; border: 1px solid var(--black-border); border-radius: 4px; background: var(--black); transition: border-color .3s; position: relative; }
+  .dep-card:hover { border-color: rgba(201,168,76,0.3); }
+  .dep-quote { font-family: 'Playfair Display', serif; font-size: 48px; color: var(--gold); line-height: 0.8; margin-bottom: 20px; opacity: .4; }
+  .dep-text { font-family: 'Cormorant Garamond', serif; font-size: 16px; line-height: 1.8; color: var(--white-dim); margin-bottom: 28px; font-weight: 300; }
+  .dep-stars { color: var(--gold); font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
+  .dep-name { font-size: 13px; color: var(--white); font-weight: 500; }
+  .dep-role { font-size: 11px; color: var(--white-muted); margin-top: 4px; }
+
+  /* ─── ESTRUTURA ─── */
+  .estrutura-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 64px; }
+  .est-item { padding: 32px 24px; text-align: center; border: 1px solid var(--black-border); border-radius: 4px; background: var(--black-card); transition: all .3s; }
+  .est-item:hover { border-color: rgba(201,168,76,0.4); background: #141414; transform: translateY(-4px); }
+  .est-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+  .est-name { font-size: 13px; color: var(--white-dim); font-weight: 400; }
+
+  /* ─── FAQ ─── */
+  .faq-list { margin-top: 64px; max-width: 720px; }
+  .faq-item { border-bottom: 1px solid var(--black-border); padding: 24px 0; }
+  .faq-q { font-size: 15px; color: var(--white); cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 400; gap: 20px; }
+  .faq-q:hover { color: var(--gold); }
+  .faq-toggle { color: var(--gold); font-size: 20px; flex-shrink: 0; transition: transform .3s; }
+  .faq-a { font-size: 14px; color: var(--white-muted); line-height: 1.7; margin-top: 16px; max-height: 0; overflow: hidden; transition: max-height .4s ease; }
+  .faq-item.open .faq-toggle { transform: rotate(45deg); }
+  .faq-item.open .faq-a { max-height: 200px; }
+
+  /* ─── CONTATO ─── */
+  .contato-social { display: flex; gap: 16px; margin-top: 32px; }
+  .social-btn { width: 44px; height: 44px; border: 1px solid var(--black-border); border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; transition: all .3s; background: var(--black-card); }
+  .social-btn:hover { border-color: var(--gold); transform: translateY(-3px); }
+  .form-group { margin-bottom: 20px; }
+  .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 14px 18px; background: var(--black-card); border: 1px solid var(--black-border); border-radius: 2px; color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px; transition: border-color .3s; outline: none; -webkit-appearance: none; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: var(--white-muted); }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-group select { color: var(--white-muted); }
+  .form-group select option { background: var(--black-card); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* ─── FOOTER ─── */
+  footer { background: var(--black); border-top: 1px solid var(--black-border); padding: 60px; text-align: center; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 14px; letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+  .footer-links { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+  .footer-links a { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--white-muted); text-decoration: none; transition: color .3s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { font-size: 11px; color: var(--white-muted); letter-spacing: 1px; }
+  .footer-divider { width: 60px; height: 1px; background: rgba(201,168,76,0.3); margin: 24px auto; }
+  .footer-admin-link { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.15); text-decoration: none; margin-top: 20px; display: inline-block; cursor: pointer; transition: color .3s; border: none; background: none; }
+  .footer-admin-link:hover { color: rgba(201,168,76,0.5); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+  .shimmer-text { background: linear-gradient(90deg, var(--gold-dark) 0%, var(--gold) 40%, var(--gold-light) 50%, var(--gold) 60%, var(--gold-dark) 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 4s linear infinite; }
+  .fade-in { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── WA BUTTON ─── */
+  .wa-btn { position: fixed; bottom: 32px; right: 32px; z-index: 200; width: 56px; height: 56px; border-radius: 50%; background: #25D366; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform .3s, box-shadow .3s; }
+  .wa-btn:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,0.5); }
+
+  /* ════════════════════════════════════════
+     ADMIN OVERLAY
+  ════════════════════════════════════════ */
+  #admin-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(5,5,5,0.92);
+    display: none; align-items: center; justify-content: center;
+    backdrop-filter: blur(6px);
+    animation: fadeIn .25s ease;
+  }
+  #admin-overlay.open { display: flex; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  /* Admin Login Gate */
+  #admin-login-gate {
+    background: #fff;
+    border-radius: 14px;
+    padding: 40px 36px;
+    width: 340px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  }
+  #admin-login-gate h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: #1a1a1a; margin-bottom: 6px;
+  }
+  #admin-login-gate p { font-size: 12px; color: #888; margin-bottom: 28px; }
+  #admin-login-gate label { font-size: 11px; color: #888; display: block; margin-bottom: 5px; }
+  #admin-login-gate input {
+    width: 100%; padding: 9px 12px;
+    border: 1px solid #ddd; border-radius: 8px;
+    font-size: 13px; color: #333; margin-bottom: 16px;
+    font-family: 'DM Sans', sans-serif; outline: none;
+  }
+  #admin-login-gate input:focus { border-color: #534AB7; }
+  #admin-login-gate .login-btn {
+    width: 100%; padding: 10px; background: #534AB7; color: #fff;
+    border: none; border-radius: 8px; font-size: 13px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; transition: background .2s;
+  }
+  #admin-login-gate .login-btn:hover { background: #443aa0; }
+  #admin-login-gate .cancel-btn {
+    width: 100%; padding: 8px; background: transparent; color: #888;
+    border: 1px solid #ddd; border-radius: 8px; font-size: 12px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; margin-top: 8px;
+  }
+  #admin-login-error { color: #c0392b; font-size: 11px; margin-top: -10px; margin-bottom: 12px; display: none; }
+
+  /* Admin Panel */
+  #admin-panel {
+    width: min(1060px, 97vw);
+    height: min(680px, 94vh);
+    background: var(--adm-bg);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0 32px 100px rgba(0,0,0,0.7);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    display: none;
+  }
+  #admin-panel.open { display: flex; }
+
+  /* Sidebar */
+  .adm-sidebar {
+    width: 210px; background: var(--adm-white); border-right: 0.5px solid var(--adm-border);
+    display: flex; flex-direction: column; flex-shrink: 0;
+  }
+  .adm-sidebar-header {
+    padding: 18px 14px 12px; border-bottom: 0.5px solid var(--adm-border);
+  }
+  .adm-sidebar-header .adm-brand {
+    font-size: 13px; font-weight: 500; color: #1a1a1a;
+  }
+  .adm-sidebar-header .adm-brand i { font-size: 15px; vertical-align: -2px; margin-right: 5px; color: var(--adm-purple); }
+  .adm-sidebar-header .adm-sub { font-size: 11px; color: #aaa; margin-top: 2px; }
+  .adm-nav { flex: 1; padding-top: 8px; overflow-y: auto; }
+  .adm-nav-item {
+    display: flex; align-items: center; gap: 8px; padding: 9px 14px;
+    font-size: 12.5px; cursor: pointer; border-left: 2px solid transparent;
+    transition: all .15s; color: #666;
+  }
+  .adm-nav-item i { font-size: 15px; }
+  .adm-nav-item:hover { color: var(--adm-purple); background: #f8f8fc; }
+  .adm-nav-item.active { color: var(--adm-purple); background: var(--adm-purple-light); border-left-color: var(--adm-purple); }
+  .adm-sidebar-footer { padding: 12px 14px; border-top: 0.5px solid var(--adm-border); }
+  .adm-close-btn {
+    width: 100%; padding: 7px; border: 0.5px solid #ddd; border-radius: 8px;
+    background: transparent; color: #888; font-size: 12px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+    font-family: inherit; transition: all .15s;
+  }
+  .adm-close-btn:hover { background: #fef2f2; border-color: #f0a0a0; color: #c0392b; }
+
+  /* Main content */
+  .adm-main { flex: 1; overflow-y: auto; display: flex; flex-direction: column; }
+  .adm-topbar {
+    padding: 13px 18px; border-bottom: 0.5px solid var(--adm-border);
+    background: var(--adm-white); display: flex; justify-content: space-between; align-items: center;
+    flex-shrink: 0;
+  }
+  .adm-topbar-title { font-size: 14px; font-weight: 500; }
+  .adm-content { padding: 18px; flex: 1; }
+
+  /* Admin components */
+  .adm-grid4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 14px; }
+  .adm-grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+  .adm-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .adm-stat { background: #F7F6F2; border-radius: 8px; padding: 12px 14px; }
+  .adm-stat-label { font-size: 11px; color: #888; margin-bottom: 5px; }
+  .adm-stat-value { font-size: 20px; font-weight: 500; color: #1a1a1a; }
+  .adm-stat-badge { margin-top: 5px; }
+  .adm-card { background: var(--adm-white); border: 0.5px solid var(--adm-border); border-radius: 10px; padding: 14px; margin-bottom: 12px; }
+  .adm-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .adm-card-title { font-size: 12.5px; font-weight: 500; }
+  .adm-badge { font-size: 10.5px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+  .adm-badge.green { background: #EAFDE8; color: #27500A; }
+  .adm-badge.yellow { background: #FAEEDA; color: #633806; }
+  .adm-badge.blue { background: #E6F1FB; color: #0C447C; }
+  .adm-badge.gray { background: #F1EFE8; color: #444441; }
+  .adm-badge.red { background: #FCEBEB; color: #791F1F; }
+  .adm-btn { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; padding: 5px 11px; border-radius: 7px; border: 0.5px solid #ccc; background: transparent; color: #333; cursor: pointer; font-family: inherit; transition: all .15s; }
+  .adm-btn:hover { background: #f5f5f5; }
+  .adm-btn.primary { background: var(--adm-purple); color: #fff; border-color: var(--adm-purple); }
+  .adm-btn.primary:hover { background: #443aa0; }
+  .adm-btn i { font-size: 13px; }
+  table.adm-table { width: 100%; border-collapse: collapse; }
+  table.adm-table th { padding: 6px 9px; font-size: 10.5px; color: #888; font-weight: 400; text-align: left; border-bottom: 0.5px solid #e8e7e0; }
+  table.adm-table td { padding: 7px 9px; font-size: 11.5px; color: #333; border-bottom: 0.5px solid #e8e7e0; }
+  table.adm-table tr:last-child td { border-bottom: none; }
+  .adm-progress { height: 5px; background: #eee; border-radius: 4px; margin-top: 6px; }
+  .adm-progress-bar { height: 100%; background: var(--adm-purple); border-radius: 4px; }
+  .adm-icon-btn { background: none; border: none; cursor: pointer; color: #bbb; padding: 2px; font-size: 14px; transition: color .15s; }
+  .adm-icon-btn:hover { color: #555; }
+  .adm-form-group { display: flex; flex-direction: column; gap: 4px; }
+  .adm-form-group label { font-size: 11.5px; color: #888; }
+  .adm-form-group input, .adm-form-group textarea, .adm-form-group select {
+    font-size: 12.5px; padding: 7px 9px; border: 0.5px solid #ccc; border-radius: 7px;
+    background: #fff; color: #333; font-family: inherit; outline: none; transition: border-color .15s;
+  }
+  .adm-form-group input:focus, .adm-form-group textarea:focus, .adm-form-group select:focus { border-color: var(--adm-purple); }
+  .adm-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--adm-purple-light); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: var(--adm-purple); }
+
+  /* Lot cards */
+  .adm-lot-card { border: 0.5px solid var(--adm-border); border-radius: 8px; padding: 11px; }
+  .adm-lot-card.active-lot { border: 1.5px solid var(--adm-purple); }
+  .adm-lot-name { font-size: 12.5px; font-weight: 500; margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
+  .adm-lot-price { font-size: 17px; font-weight: 500; color: var(--adm-purple); }
+  .adm-lot-meta { font-size: 10.5px; color: #888; margin-top: 3px; }
+
+  /* Map mock */
+  .adm-map-mock { border: 0.5px solid var(--adm-border); border-radius: 8px; height: 140px; background: linear-gradient(135deg,#c8d8a0,#d4e4a8 40%,#b8c898 60%,#dce8b0); position: relative; overflow: hidden; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; }
+  .adm-map-mock i { font-size: 32px; color: var(--adm-purple); position: absolute; top: 30%; left: 50%; transform: translate(-50%,-50%); }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 64px 24px; }
+    #sobre { grid-template-columns: 1fr; }
+    .sobre-visual { height: 300px; }
+    .exp-grid { grid-template-columns: 1fr 1fr; }
+    .eventos-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .steps-grid::before { display: none; }
+    .dep-grid { grid-template-columns: 1fr; }
+    .estrutura-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .gallery-item.large { grid-column: span 2; }
+    footer { padding: 40px 24px; }
+    #admin-panel { flex-direction: column; height: 94vh; }
+    .adm-sidebar { width: 100%; height: auto; border-right: none; border-bottom: 0.5px solid var(--adm-border); }
+    .adm-nav { display: flex; overflow-x: auto; padding: 4px 8px; }
+    .adm-nav-item { flex-shrink: 0; border-left: none; border-bottom: 2px solid transparent; padding: 7px 11px; }
+    .adm-nav-item.active { border-left-color: transparent; border-bottom-color: var(--adm-purple); }
+    .adm-grid4 { grid-template-columns: repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Camarote <span>Resenha</span> Morumbi</div>
+  <div class="nav-links">
+    <a href="#sobre">Sobre</a>
+    <a href="#experiencia">Experiência</a>
+    <a href="#eventos">Eventos</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#contato" class="nav-cta">Comprar</a>
+    <a class="nav-admin-btn" onclick="openAdminOverlay()">⚙ Admin</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-badge">✦ Experiência Premium · MorumBIS · São Paulo</div>
+  <h1 class="hero-title">
+    Viva o Espetáculo<br>
+    <em class="shimmer-text">Como Nunca Antes</em>
+  </h1>
+  <p class="hero-subtitle">Experiência Premium com Open Bar, Open Food e Vista Privilegiada no MorumBIS.</p>
+  <div class="hero-buttons">
+    <button class="btn-primary" onclick="document.getElementById('eventos').scrollIntoView({behavior:'smooth'})">Comprar Ingressos</button>
+    <button class="btn-outline" onclick="document.getElementById('sobre').scrollIntoView({behavior:'smooth'})">Conhecer a Experiência</button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-number">+100</div><div class="stat-label">Eventos Realizados</div></div>
+    <div class="stat-item"><div class="stat-number">VIP</div><div class="stat-label">Experiência Premium</div></div>
+    <div class="stat-item"><div class="stat-number">🥂</div><div class="stat-label">Open Bar Premium</div></div>
+    <div class="stat-item"><div class="stat-number">🍽</div><div class="stat-label">Open Food Premium</div></div>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section id="sobre" class="fade-in">
+  <div class="sobre-visual">
+    <div class="sobre-visual-inner">
+      <div class="sobre-icon">🏟</div>
+      <div class="sobre-visual-title">Camarote Resenha Morumbi</div>
+      <div class="sobre-visual-sub">MorumBIS · São Paulo</div>
+    </div>
+  </div>
+  <div>
+    <span class="section-tag">✦ Sobre o Camarote</span>
+    <h2 class="section-title">O destino certo para<br>viver a <em>noite perfeita</em></h2>
+    <div class="section-divider"></div>
+    <p class="section-desc">O Camarote Resenha Morumbi oferece uma experiência exclusiva para os maiores shows e eventos realizados no Estádio MorumBIS, em São Paulo. Cada detalhe foi pensado para proporcionar conforto, sofisticação e momentos inesquecíveis.</p>
+    <div class="benefits-grid">
+      <div class="benefit-item"><span class="benefit-dot"></span> Open Bar Premium</div>
+      <div class="benefit-item"><span class="benefit-dot"></span> Open Food Premium</div>
+      <div class="benefit-item"><span class="benefit-dot"></span> Ambiente Climatizado</div>
+      <div class="benefit-item"><span class="benefit-dot"></span> Wi-Fi Gratuito</div>
+      <div class="benefit-item"><span class="benefit-dot"></span> Espaço Instagramável</div>
+      <div class="benefit-item"><span class="benefit-dot"></span> Banheiros Exclusivos</div>
+      <div class="benefit-item"><span class="benefit-dot"></span> Vista Privilegiada</div>
+      <div class="benefit-item"><span class="benefit-dot"></span> Atendimento Premium</div>
+      <div class="benefit-item"><span class="benefit-dot"></span> Segurança e Conforto</div>
+      <div class="benefit-item"><span class="benefit-dot"></span> Lounge VIP</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIÊNCIA -->
+<div id="experiencia" class="section-full fade-in" style="background: var(--black-card); padding-top: 100px; padding-bottom: 100px;">
+  <div class="section-inner">
+    <span class="section-tag">✦ Experiência VIP</span>
+    <h2 class="section-title">Tudo incluso,<br>nada além do <em>extraordinário</em></h2>
+    <div class="exp-grid">
+      <div class="exp-card"><span class="exp-icon">🥂</span><div class="exp-title">Open Bar Premium</div><p class="exp-desc">Drinks sofisticados, cervejas artesanais, refrigerantes e água durante todo o evento — sem limites, sem filas.</p></div>
+      <div class="exp-card"><span class="exp-icon">🍽</span><div class="exp-title">Open Food Premium</div><p class="exp-desc">Buffet completo com diversas opções gastronômicas cuidadosamente selecionadas para a sua experiência.</p></div>
+      <div class="exp-card"><span class="exp-icon">🎯</span><div class="exp-title">Vista Exclusiva</div><p class="exp-desc">Posição privilegiada para acompanhar cada detalhe do show com visibilidade total do palco.</p></div>
+      <div class="exp-card"><span class="exp-icon">✨</span><div class="exp-title">Ambiente Premium</div><p class="exp-desc">Espaço sofisticado com decoração moderna, ar-condicionado e toda a estrutura para seu conforto.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRÓXIMOS EVENTOS -->
+<section id="eventos" class="fade-in">
+  <span class="section-tag">✦ Próximos Eventos</span>
+  <h2 class="section-title">Garanta seu lugar<br>no próximo <em>grande show</em></h2>
+  <div class="section-divider"></div>
+  <div class="eventos-grid">
+    <div class="evento-card">
+      <div class="evento-card-header" style="background: linear-gradient(135deg, #0a0a0a, #1a1a0a);">
+        <div class="evento-bg">🎸</div><div class="evento-overlay"></div>
+        <span class="evento-tag">Esgotando</span>
+      </div>
+      <div class="evento-body">
+        <div class="evento-date">📅 Consulte o site</div>
+        <div class="evento-name">Linkin Park</div>
+        <div class="evento-local">📍 MorumBIS · São Paulo</div>
+        <a href="https://www.ticketmaster.com.br" target="_blank" class="evento-btn">Comprar Ingresso</a>
+      </div>
+    </div>
+    <div class="evento-card">
+      <div class="evento-card-header" style="background: linear-gradient(135deg, #0a0a1a, #1a0a1a);">
+        <div class="evento-bg">🎤</div><div class="evento-overlay"></div>
+        <span class="evento-tag">Em breve</span>
+      </div>
+      <div class="evento-body">
+        <div class="evento-date">📅 Próxima temporada</div>
+        <div class="evento-name">Próximo Show</div>
+        <div class="evento-local">📍 MorumBIS · São Paulo</div>
+        <button class="evento-btn">Em Breve</button>
+      </div>
+    </div>
+    <div class="evento-card">
+      <div class="evento-card-header" style="background: linear-gradient(135deg, #1a0a0a, #0a0a0a);">
+        <div class="evento-bg">🎵</div><div class="evento-overlay"></div>
+        <span class="evento-tag">Em breve</span>
+      </div>
+      <div class="evento-body">
+        <div class="evento-date">📅 Aguarde</div>
+        <div class="evento-name">Novidades em Breve</div>
+        <div class="evento-local">📍 MorumBIS · São Paulo</div>
+        <button class="evento-btn">Cadastrar Interesse</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<div id="galeria" class="section-full fade-in" style="background: var(--black-soft); padding: 100px 0;">
+  <div class="section-inner">
+    <span class="section-tag">✦ Galeria</span>
+    <h2 class="section-title">Momentos que<br>ficam para <em>sempre</em></h2>
+    <div class="gallery-grid">
+      <div class="gallery-item large" style="background: linear-gradient(135deg, #1a1200, #0a0a0a); min-height: 220px;">🎪<div class="gallery-overlay">Show ao Vivo</div></div>
+      <div class="gallery-item" style="background: linear-gradient(135deg, #0a0a1a, #050505);">🥂<div class="gallery-overlay">Open Bar</div></div>
+      <div class="gallery-item" style="background: linear-gradient(135deg, #1a0a00, #050505);">🍽<div class="gallery-overlay">Open Food</div></div>
+      <div class="gallery-item" style="background: linear-gradient(135deg, #0a1a0a, #050505);">🌟<div class="gallery-overlay">Espaço VIP</div></div>
+      <div class="gallery-item large" style="background: linear-gradient(135deg, #1a0a0a, #0a0a0a);">🏟<div class="gallery-overlay">Vista Privilegiada</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ESTRUTURA -->
+<section id="estrutura" class="fade-in">
+  <span class="section-tag">✦ Estrutura</span>
+  <h2 class="section-title">Infraestrutura pensada<br>para o seu <em>conforto</em></h2>
+  <div class="section-divider"></div>
+  <div class="estrutura-grid">
+    <div class="est-item"><span class="est-icon">❄️</span><div class="est-name">Ar-condicionado</div></div>
+    <div class="est-item"><span class="est-icon">📶</span><div class="est-name">Wi-Fi Gratuito</div></div>
+    <div class="est-item"><span class="est-icon">🚿</span><div class="est-name">Banheiros Privativos</div></div>
+    <div class="est-item"><span class="est-icon">🛋</span><div class="est-name">Lounge VIP</div></div>
+    <div class="est-item"><span class="est-icon">📸</span><div class="est-name">Espaço Instagramável</div></div>
+    <div class="est-item"><span class="est-icon">👔</span><div class="est-name">Atendimento Especializado</div></div>
+    <div class="est-item"><span class="est-icon">🔒</span><div class="est-name">Controle de Acesso</div></div>
+    <div class="est-item"><span class="est-icon">🎯</span><div class="est-name">Vista do Palco</div></div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<div class="section-full fade-in" style="background: var(--black-card); padding: 100px 0;">
+  <div class="section-inner">
+    <span class="section-tag">✦ Como Funciona</span>
+    <h2 class="section-title">Simples assim para<br>viver o <em>melhor show</em></h2>
+    <div class="steps-grid">
+      <div class="step-item"><div class="step-number">01</div><div class="step-title">Escolha seu Evento</div><p class="step-desc">Veja os próximos shows e eventos disponíveis no camarote</p></div>
+      <div class="step-item"><div class="step-number">02</div><div class="step-title">Garanta seu Ingresso</div><p class="step-desc">Compre seu ingresso de forma segura pela Ticketmaster</p></div>
+      <div class="step-item"><div class="step-number">03</div><div class="step-title">Receba o Acesso</div><p class="step-desc">Receba todas as informações de acesso e o que esperar</p></div>
+      <div class="step-item"><div class="step-number">04</div><div class="step-title">Viva a Experiência</div><p class="step-desc">Aproveite uma experiência VIP inesquecível no MorumBIS</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- DEPOIMENTOS -->
+<div id="depoimentos" class="section-full fade-in" style="background: var(--black-card); padding: 100px 0;">
+  <div class="section-inner">
+    <span class="section-tag">✦ Depoimentos</span>
+    <h2 class="section-title">O que dizem<br>nossos <em>convidados</em></h2>
+    <div class="dep-grid">
+      <div class="dep-card"><div class="dep-quote">"</div><div class="dep-stars">★★★★★</div><p class="dep-text">Experiência incrível! O open bar, o open food, a vista do palco — tudo impecável. Com certeza voltarei para o próximo show.</p><div class="dep-name">Ana Carolina M.</div><div class="dep-role">São Paulo · Evento Linkin Park</div></div>
+      <div class="dep-card"><div class="dep-quote">"</div><div class="dep-stars">★★★★★</div><p class="dep-text">Valeu cada centavo! O atendimento é impecável, o espaço é sofisticado e a vista é privilegiada. Recomendo de olhos fechados.</p><div class="dep-name">Roberto F.</div><div class="dep-role">Campinas · Show Internacional</div></div>
+      <div class="dep-card"><div class="dep-quote">"</div><div class="dep-stars">★★★★★</div><p class="dep-text">Ambiente climatizado, drinks de qualidade e uma estrutura que supera qualquer expectativa. O espaço instagramável é incrível!</p><div class="dep-name">Juliana T.</div><div class="dep-role">São Paulo · Rock in Rio Edition</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section id="faq" class="fade-in">
+  <span class="section-tag">✦ Perguntas Frequentes</span>
+  <h2 class="section-title">Tudo o que você<br>precisa <em>saber</em></h2>
+  <div class="faq-list">
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">O ingresso do show está incluso?<span class="faq-toggle">+</span></div><div class="faq-a">Não. O ingresso do show é vendido separadamente pelo Ticketmaster. O Camarote Resenha Morumbi oferece a experiência VIP com open bar, open food e todos os benefícios do camarote.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Como funciona o acesso ao camarote?<span class="faq-toggle">+</span></div><div class="faq-a">Após a compra do ingresso, você receberá todas as instruções de acesso por e-mail. O camarote possui entrada exclusiva com controle de acesso diferenciado dos demais setores do estádio.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Existe classificação etária?<span class="faq-toggle">+</span></div><div class="faq-a">Sim. A classificação etária segue as regras do evento contratante. Para consumo de bebidas alcoólicas, é obrigatório ter 18 anos ou mais.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">O que está incluso no Open Bar?<span class="faq-toggle">+</span></div><div class="faq-a">O Open Bar inclui cervejas, drinks, refrigerantes, água e sucos durante todo o evento. O cardápio pode variar de acordo com o evento.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">O que está incluso no Open Food?<span class="faq-toggle">+</span></div><div class="faq-a">O Open Food é um buffet completo com diversas opções gastronômicas preparadas para oferecer variedade e qualidade durante toda a duração do evento.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Onde fica o camarote no MorumBIS?<span class="faq-toggle">+</span></div><div class="faq-a">O Camarote Resenha Morumbi fica localizado no Estádio MorumBIS, na Praça Roberto Gomes Pedrosa, 1, Morumbi, São Paulo/SP.</div></div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<div id="contato" class="section-full fade-in" style="background: var(--black-soft); padding: 100px 0;">
+  <div class="section-inner">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;">
+      <div>
+        <span class="section-tag">✦ Fale Conosco</span>
+        <h2 class="section-title">Pronto para uma<br>experiência <em>inesquecível?</em></h2>
+        <div class="section-divider"></div>
+        <p class="section-desc" style="margin-bottom: 40px;">Entre em contato e nosso time responderá em até 24 horas com todas as informações sobre disponibilidade e ingressos.</p>
+        <div style="margin-bottom: 32px;"><p style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;">Endereço</p><p style="font-size: 14px; color: var(--white-dim); line-height: 2;">MorumBIS<br>Praça Roberto Gomes Pedrosa, 1<br>Morumbi – São Paulo/SP</p></div>
+        <div class="contato-social">
+          <div class="social-btn" title="WhatsApp">💬</div>
+          <div class="social-btn" title="Instagram">📷</div>
+          <div class="social-btn" title="YouTube" onclick="window.open('https://www.youtube.com/@CamaroteResenhaMorumbi','_blank')">▶️</div>
+        </div>
+      </div>
+      <div style="background: var(--black-card); padding: 48px; border: 1px solid var(--black-border); border-radius: 4px;">
+        <p style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 32px;">Envie uma mensagem</p>
+        <div class="form-row"><div class="form-group"><input type="text" placeholder="Seu nome"></div><div class="form-group"><input type="tel" placeholder="Telefone"></div></div>
+        <div class="form-group"><input type="email" placeholder="E-mail"></div>
+        <div class="form-group"><select><option value="">Evento desejado</option><option>Linkin Park</option><option>Próximos eventos</option><option>Informações gerais</option></select></div>
+        <div class="form-group"><textarea placeholder="Sua mensagem..."></textarea></div>
+        <button class="btn-primary" style="width: 100%; padding: 18px;">Enviar Mensagem</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Camarote Resenha Morumbi</div>
+  <div class="footer-divider"></div>
+  <div class="footer-links">
+    <a href="#sobre">Sobre</a>
+    <a href="#experiencia">Experiência</a>
+    <a href="#eventos">Eventos</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contato">Contato</a>
+    <a href="#">Termos de Uso</a>
+    <a href="#">Política de Privacidade</a>
+    <a href="https://www.youtube.com/@CamaroteResenhaMorumbi" target="_blank">YouTube</a>
+  </div>
+  <p class="footer-copy">© 2025 Camarote Resenha Morumbi. Todos os direitos reservados. · MorumBIS – São Paulo/SP</p>
+  <br>
+  <button class="footer-admin-link" onclick="openAdminOverlay()">⚙ Área administrativa</button>
+</footer>
+
+<button class="wa-btn" title="WhatsApp">💬</button>
+
+<!-- ═══════════════════════════════════════
+     ADMIN OVERLAY
+════════════════════════════════════════ -->
+<div id="admin-overlay">
+
+  <!-- LOGIN GATE -->
+  <div id="admin-login-gate">
+    <h2>Acesso Restrito</h2>
+    <p>Entre com suas credenciais de administrador</p>
+    <label>E-mail</label>
+    <input type="email" id="adm-email" placeholder="admin@camarote.com" value="admin@camarote.com">
+    <label>Senha</label>
+    <input type="password" id="adm-pass" placeholder="••••••••">
+    <div id="admin-login-error">Credenciais inválidas. Tente novamente.</div>
+    <button class="login-btn" onclick="tryAdminLogin()">
+      <i class="ti ti-login" style="font-size:14px;vertical-align:-2px;margin-right:5px;"></i>Entrar
+    </button>
+    <button class="cancel-btn" onclick="closeAdminOverlay()">Cancelar</button>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div id="admin-panel">
+    <!-- Sidebar -->
+    <div class="adm-sidebar">
+      <div class="adm-sidebar-header">
+        <div class="adm-brand"><i class="ti ti-ticket"></i>EventAdmin</div>
+        <div class="adm-sub">Camarote Resenha</div>
+      </div>
+      <nav class="adm-nav" id="adm-nav">
+        <div class="adm-nav-item active" onclick="setAdmTab('dashboard',this)"><i class="ti ti-layout-dashboard"></i>Dashboard</div>
+        <div class="adm-nav-item" onclick="setAdmTab('eventos',this)"><i class="ti ti-calendar-event"></i>Eventos</div>
+        <div class="adm-nav-item" onclick="setAdmTab('ingressos',this)"><i class="ti ti-ticket"></i>Ingressos</div>
+        <div class="adm-nav-item" onclick="setAdmTab('precos',this)"><i class="ti ti-tag"></i>Preços e lotes</div>
+        <div class="adm-nav-item" onclick="setAdmTab('imagens',this)"><i class="ti ti-photo"></i>Imagens</div>
+        <div class="adm-nav-item" onclick="setAdmTab('clientes',this)"><i class="ti ti-users"></i>Clientes</div>
+        <div class="adm-nav-item" onclick="setAdmTab('mapa',this)"><i class="ti ti-map-pin"></i>Mapa</div>
+        <div class="adm-nav-item" onclick="setAdmTab('acesso',this)"><i class="ti ti-lock"></i>Acesso</div>
+      </nav>
+      <div class="adm-sidebar-footer">
+        <button class="adm-close-btn" onclick="closeAdminOverlay()">
+          <i class="ti ti-door-exit" style="font-size:14px;"></i> Sair do painel
+        </button>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="adm-main" id="adm-main">
+      <!-- content injected by JS -->
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── FAQ ───
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ─── fade-in observer ───
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// ─── ADMIN OVERLAY ───
+function openAdminOverlay() {
+  document.getElementById('admin-overlay').classList.add('open');
+  document.getElementById('admin-login-gate').style.display = 'block';
+  document.getElementById('admin-panel').classList.remove('open');
+  document.getElementById('adm-pass').value = '';
+  document.getElementById('admin-login-error').style.display = 'none';
+  document.body.style.overflow = 'hidden';
+}
+function closeAdminOverlay() {
+  document.getElementById('admin-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('admin-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeAdminOverlay();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAdminOverlay(); });
+
+function tryAdminLogin() {
+  const email = document.getElementById('adm-email').value.trim();
+  const pass = document.getElementById('adm-pass').value;
+  if ((email === 'admin@camarote.com' || email === 'admin@eventoadmin.com') && pass === 'admin123') {
+    document.getElementById('admin-login-gate').style.display = 'none';
+    document.getElementById('admin-panel').classList.add('open');
+    renderAdmTab('dashboard');
+  } else {
+    document.getElementById('admin-login-error').style.display = 'block';
+  }
+}
+document.getElementById('adm-pass').addEventListener('keydown', e => { if(e.key==='Enter') tryAdminLogin(); });
+
+// ─── ADMIN TABS ───
+let currentAdmTab = 'dashboard';
+function setAdmTab(tab, el) {
+  currentAdmTab = tab;
+  document.querySelectorAll('.adm-nav-item').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+  renderAdmTab(tab);
+}
+function renderAdmTab(tab) {
+  const main = document.getElementById('adm-main');
+  const tabs = {
+    dashboard: renderDashboard,
+    eventos: renderEventos,
+    ingressos: renderIngressos,
+    precos: renderPrecos,
+    imagens: renderImagens,
+    clientes: renderClientes,
+    mapa: renderMapa,
+    acesso: renderAcesso,
+  };
+  main.innerHTML = (tabs[tab] || renderDashboard)();
+}
+
+function badge(text, color) {
+  return `<span class="adm-badge ${color}">${text}</span>`;
+}
+function progressBar(pct) {
+  return `<div class="adm-progress"><div class="adm-progress-bar" style="width:${pct}%"></div></div>`;
+}
+
+const events = [
+  { id:1, name:"Linkin Park", date:"Consulte o site", sold:620, total:800, status:"published" },
+  { id:2, name:"Stand-up Comedy Night", date:"21 jun 2026", sold:180, total:300, status:"published" },
+  { id:3, name:"Próximo Show", date:"Temporada 2026", sold:42, total:500, status:"hidden" },
+];
+const customers = [
+  { initials:"AM", name:"Ana Melo", email:"ana@email.com", purchases:3, spent:"R$240" },
+  { initials:"RS", name:"Rafael Silva", email:"rsilva@email.com", purchases:1, spent:"R$80" },
+  { initials:"CP", name:"Carla Pinto", email:"carla@email.com", purchases:5, spent:"R$500" },
+  { initials:"JF", name:"João Ferreira", email:"joao@email.com", purchases:2, spent:"R$160" },
+];
+const lots = [
+  { name:"1º Lote", price:"R$60", qty:200, sold:200, status:"Encerrado", active:false },
+  { name:"2º Lote", price:"R$80", qty:300, sold:220, status:"Ativo", active:true },
+  { name:"3º Lote", price:"R$100", qty:300, sold:0, status:"Não iniciado", active:false },
+];
+const coupons = [
+  { code:"RESENHA20", desc:"Desconto 20% · Uso ilimitado · Expira 10 jun", active:true },
+  { code:"VIP50", desc:"R$50 off VIP · 30 usos restantes", active:true },
+  { code:"PROMO10", desc:"10% off · Expirado", active:false },
+];
+
+function renderDashboard() {
+  return `
+  <div class="adm-topbar">
+    <span class="adm-topbar-title">Visão geral — Camarote Resenha Morumbi</span>
+    <button class="adm-btn primary"><i class="ti ti-plus"></i>Novo evento</button>
+  </div>
+  <div class="adm-content">
+    <div class="adm-grid4">
+      <div class="adm-stat"><div class="adm-stat-label">Ingressos vendidos</div><div class="adm-stat-value">1.842</div><div class="adm-stat-badge">${badge('+12% esta semana','green')}</div></div>
+      <div class="adm-stat"><div class="adm-stat-label">Receita total</div><div class="adm-stat-value">R$74.600</div><div class="adm-stat-badge">${badge('+8% vs mês anterior','green')}</div></div>
+      <div class="adm-stat"><div class="adm-stat-label">Eventos ativos</div><div class="adm-stat-value">5</div><div class="adm-stat-badge">${badge('3 em breve','blue')}</div></div>
+      <div class="adm-stat"><div class="adm-stat-label">Clientes</div><div class="adm-stat-value">941</div><div class="adm-stat-badge">${badge('14 novos hoje','yellow')}</div></div>
+    </div>
+    <div class="adm-card">
+      <div class="adm-card-header"><span class="adm-card-title">Eventos recentes</span><button class="adm-btn" onclick="setAdmTab('eventos',document.querySelectorAll('.adm-nav-item')[1])">Ver todos ↗</button></div>
+      <table class="adm-table">
+        <thead><tr><th>Evento</th><th>Data</th><th>Ingressos</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          ${events.map(e=>`<tr><td>${e.name}</td><td>${e.date}</td><td>${e.sold}/${e.total}</td><td>${badge(e.status==='published'?'Publicado':'Oculto',e.status==='published'?'green':'yellow')}</td><td><button class="adm-icon-btn"><i class="ti ti-edit"></i></button><button class="adm-icon-btn"><i class="ti ti-copy"></i></button><button class="adm-icon-btn"><i class="ti ti-trash"></i></button></td></tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  </div>`;
+}
+
+function renderEventos() {
+  return `
+  <div class="adm-topbar">
+    <span class="adm-topbar-title">Gerenciamento de eventos</span>
+    <button class="adm-btn primary"><i class="ti ti-plus"></i>Criar evento</button>
+  </div>
+  <div class="adm-content">
+    <div class="adm-card">
+      <div class="adm-card-header"><span class="adm-card-title">Criar / Editar evento</span></div>
+      <div class="adm-grid2" style="gap:12px;">
+        <div class="adm-form-group" style="grid-column:1/-1"><label>Nome do evento</label><input type="text" value="Linkin Park — Camarote Resenha Morumbi"></div>
+        <div class="adm-form-group"><label>Data</label><input type="date" value="2026-06-14"></div>
+        <div class="adm-form-group"><label>Horário</label><input type="time" value="19:00"></div>
+        <div class="adm-form-group" style="grid-column:1/-1"><label>Descrição</label><textarea style="min-height:64px">Uma noite inesquecível com open bar, open food e a melhor vista do MorumBIS.</textarea></div>
+        <div class="adm-form-group"><label>Visibilidade</label><select><option>Publicado</option><option>Oculto</option></select></div>
+        <div class="adm-form-group"><label>Categoria</label><select><option>Música</option><option>Teatro</option><option>Esportes</option></select></div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:14px;">
+        <button class="adm-btn"><i class="ti ti-copy"></i>Duplicar</button>
+        <button class="adm-btn primary"><i class="ti ti-device-floppy"></i>Salvar</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderIngressos() {
+  const types=[['Pista',500,420,84],['VIP',200,158,79],['Backstage',100,42,42]];
+  return `
+  <div class="adm-topbar"><span class="adm-topbar-title">Gerenciamento de ingressos</span></div>
+  <div class="adm-content">
+    <div class="adm-grid4" style="margin-bottom:12px;">
+      <div class="adm-stat"><div class="adm-stat-label">Disponíveis</div><div class="adm-stat-value">800</div></div>
+      <div class="adm-stat"><div class="adm-stat-label">Vendidos</div><div class="adm-stat-value">620</div></div>
+      <div class="adm-stat"><div class="adm-stat-label">Restantes</div><div class="adm-stat-value">180</div></div>
+      <div class="adm-stat"><div class="adm-stat-label">% ocupado</div><div class="adm-stat-value">77%</div></div>
+    </div>
+    <div class="adm-card">
+      <div class="adm-card-header"><span class="adm-card-title">Controle de estoque — Linkin Park</span></div>
+      <table class="adm-table">
+        <thead><tr><th>Tipo</th><th>Disponível</th><th>Vendido</th><th>Restante</th><th>Ocupação</th></tr></thead>
+        <tbody>${types.map(([t,av,s,p])=>`<tr><td>${t}</td><td>${av}</td><td>${s}</td><td>${av-s}</td><td>${progressBar(p)}</td></tr>`).join('')}</tbody>
+      </table>
+    </div>
+  </div>`;
+}
+
+function renderPrecos() {
+  return `
+  <div class="adm-topbar">
+    <span class="adm-topbar-title">Preços e lotes</span>
+    <button class="adm-btn primary"><i class="ti ti-plus"></i>Novo lote</button>
+  </div>
+  <div class="adm-content">
+    <div class="adm-card">
+      <div class="adm-card-header"><span class="adm-card-title">Lotes ativos</span></div>
+      <div class="adm-grid3" style="margin-bottom:4px;">
+        ${lots.map(l=>`<div class="adm-lot-card ${l.active?'active-lot':''}">
+          <div class="adm-lot-name">${l.name} ${l.active?badge('Ativo','blue'):''}</div>
+          <div class="adm-lot-price">${l.price}</div>
+          <div class="adm-lot-meta">${l.qty} ingressos · ${l.status}</div>
+          ${progressBar(Math.round(l.sold/l.qty*100))}
+        </div>`).join('')}
+      </div>
+    </div>
+    <div class="adm-card">
+      <div class="adm-card-header"><span class="adm-card-title">Cupons promocionais</span><button class="adm-btn"><i class="ti ti-plus"></i>Criar cupom</button></div>
+      ${coupons.map(c=>`<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <span style="font-family:monospace;font-size:12.5px;background:#F7F6F2;padding:4px 9px;border-radius:7px;border:0.5px solid #e0dfd8;">${c.code}</span>
+        <span style="font-size:11.5px;color:#888;flex:1">${c.desc}</span>
+        ${badge(c.active?'Ativo':'Inativo',c.active?'green':'gray')}
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function renderImagens() {
+  return `
+  <div class="adm-topbar"><span class="adm-topbar-title">Gerenciamento de imagens</span></div>
+  <div class="adm-content">
+    <div class="adm-card">
+      <div class="adm-card-header"><span class="adm-card-title">Banner principal</span></div>
+      <div style="border:0.5px solid #e0dfd8;border-radius:8px;background:#F7F6F2;height:70px;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;color:#888;font-size:13px;"><i class="ti ti-photo" style="font-size:18px;"></i>banner-camarote.jpg</div>
+      <div style="border:1.5px dashed #ccc;border-radius:8px;padding:20px;text-align:center;color:#888;font-size:13px;cursor:pointer;">
+        <i class="ti ti-upload" style="font-size:26px;display:block;margin-bottom:7px;"></i>Arraste um banner ou clique para enviar
+        <div style="font-size:10.5px;margin-top:3px;color:#bbb;">PNG, JPG até 5MB · proporção recomendada 3:1</div>
+      </div>
+    </div>
+    <div class="adm-card">
+      <div class="adm-card-header"><span class="adm-card-title">Galeria de fotos</span><span style="font-size:10.5px;color:#aaa;">arraste para reordenar</span></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+        ${[1,2,3].map(n=>`<div style="border:0.5px solid #e0dfd8;border-radius:8px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:#F7F6F2;cursor:pointer;color:#bbb;font-size:20px;"><i class="ti ti-photo"></i></div>`).join('')}
+        <div style="border:1.5px dashed #ccc;border-radius:8px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#bbb;font-size:20px;"><i class="ti ti-plus"></i></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderClientes() {
+  return `
+  <div class="adm-topbar">
+    <span class="adm-topbar-title">Gerenciamento de clientes</span>
+    <button class="adm-btn"><i class="ti ti-file-spreadsheet"></i>Exportar Excel</button>
+  </div>
+  <div class="adm-content">
+    <div class="adm-card">
+      <div class="adm-card-header"><span class="adm-card-title">Lista de compradores</span><input type="text" placeholder="Buscar cliente..." style="font-size:11.5px;padding:5px 9px;width:170px;border:0.5px solid #ccc;border-radius:7px;background:#fff;color:#333;font-family:inherit;outline:none;"></div>
+      <table class="adm-table">
+        <thead><tr><th></th><th>Nome</th><th>E-mail</th><th>Compras</th><th>Total</th><th></th></tr></thead>
+        <tbody>
+          ${customers.map(c=>`<tr>
+            <td><div class="adm-avatar">${c.initials}</div></td>
+            <td>${c.name}</td><td style="color:#888">${c.email}</td><td>${c.purchases}</td><td>${c.spent}</td>
+            <td><button class="adm-icon-btn"><i class="ti ti-eye"></i></button></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  </div>`;
+}
+
+function renderMapa() {
+  return `
+  <div class="adm-topbar"><span class="adm-topbar-title">Mapa interativo</span></div>
+  <div class="adm-content">
+    <div class="adm-card">
+      <div class="adm-card-header"><span class="adm-card-title">Localização do evento</span></div>
+      <div class="adm-map-mock"><i class="ti ti-map-pin"></i></div>
+      <div class="adm-grid2" style="gap:10px;">
+        <div class="adm-form-group" style="grid-column:1/-1"><label>Endereço</label><input type="text" value="Praça Roberto Gomes Pedrosa, 1 — Morumbi, São Paulo, SP"></div>
+        <div class="adm-form-group"><label>Latitude</label><input type="text" value="-23.6007"></div>
+        <div class="adm-form-group"><label>Longitude</label><input type="text" value="-46.7196"></div>
+        <div class="adm-form-group" style="grid-column:1/-1"><label>Incorporar Google Maps (embed URL)</label><input type="text" value="https://maps.google.com/maps?q=-23.600,-46.719&z=15&output=embed"></div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:14px;">
+        <button class="adm-btn"><i class="ti ti-route"></i>Exibir rota</button>
+        <button class="adm-btn primary"><i class="ti ti-device-floppy"></i>Salvar localização</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderAcesso() {
+  return `
+  <div class="adm-topbar"><span class="adm-topbar-title">Controle de acesso</span></div>
+  <div class="adm-content">
+    <div style="max-width:380px;">
+      <div class="adm-card">
+        <div class="adm-card-header"><span class="adm-card-title">Login administrador</span></div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="adm-form-group"><label>E-mail</label><input type="email" value="admin@camarote.com"></div>
+          <div class="adm-form-group"><label>Senha</label><input type="password" placeholder="••••••••"></div>
+          <div style="display:flex;flex-direction:column;gap:7px;margin-top:4px;">
+            <button style="background:#534AB7;color:#fff;border:none;border-radius:8px;padding:8px;font-size:12.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;font-family:inherit;"><i class="ti ti-login" style="font-size:13px;"></i>Entrar</button>
+            <button style="background:transparent;border:0.5px solid #ccc;border-radius:8px;padding:7px;font-size:11.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;color:#555;font-family:inherit;"><i class="ti ti-refresh" style="font-size:12px;"></i>Recuperar senha</button>
+          </div>
+        </div>
+      </div>
+      <div class="adm-card">
+        <div class="adm-card-header"><span class="adm-card-title">Permissões</span><button class="adm-btn"><i class="ti ti-plus"></i>Novo usuário</button></div>
+        <table class="adm-table">
+          <thead><tr><th>Usuário</th><th>Papel</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>admin@camarote.com</td><td>${badge('Super admin','blue')}</td><td><button class="adm-icon-btn"><i class="ti ti-edit"></i></button></td></tr>
+            <tr><td>ops@camarote.com</td><td>${badge('Operador','yellow')}</td><td><button class="adm-icon-btn"><i class="ti ti-edit"></i></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>`;
+}
+</script>
+</body>
+</html>
